@@ -1,0 +1,86 @@
+<aside class="fixed col-span-2 hidden space-y-3 md:block">
+
+<div class="flex items-center gap-3 p-2.5">
+<!--img -->
+    <div class="">
+        <img [src]="loggedInUserData().photo" alt="" class="h-15 w-15 shrink-0 rounded-full object-cover">
+    </div>
+<!-- pio -->
+    <div class="min-w-0">
+        <h3 class="truncate text-sm font-semibold text-white">{{loggedInUserData().name}}</h3>
+        <p class="truncate text-xs text-gray-400">{{loggedInUserData().username}}</p>
+        <p class="truncate text-xs text-gray-400">pio</p>
+    </div>
+</div>
+<div class="relative w-fit">
+<img src="/images/doodles/profile-line.png" alt="" class="block w-50 h-auto">
+<button
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+    w-max cursor-pointer -rotate-6
+    bg-[#d94bd0] text-black font-bold
+        text-lg px-4 py-1
+        [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]">
+    Edit Profile
+</button>
+</div>
+<div class="flex gap-3 mt-5">
+<div>
+    <p>177</p>
+    <p>posts</p>
+</div>
+<div>
+    <p>2.3k</p>
+    <p>followers</p>
+</div>
+<div>
+    <p>512</p>
+    <p>following</p>
+</div>
+</div>
+<a routerLink="/feed" routerLinkActive="bg-[#d94bd0] text-black font-bold text-lg [clip-path:polygon(3%_15%,12%_10%,14%_5%,85%_8%,90%_12%,97%_10%,100%_20%,97%_30%,100%_35%,97%_65%,100%_75%,92%_80%,88%_85%,15%_82%,8%_85%,5%_80%,0_75%,3%_60%,0_45%,3%_25%)]"
+class="block rounded-xl p-2 text-white
+hover: hover:bg-[#d94bd0] hover:text-black
+hover:font-bold hover:text-lg
+hover:[clip-path:polygon(3%_15%,12%_10%,14%_5%,85%_8%,90%_12%,97%_10%,100%_20%,97%_30%,100%_35%,97%_65%,100%_75%,92%_80%,88%_85%,15%_82%,8%_85%,5%_80%,0_75%,3%_60%,0_45%,3%_25%)]"
+><i class="fa-regular fa-house"></i> For You </a>
+
+<a routerLink=""
+class="block rounded-xl p-2 text-white
+hover: hover:bg-[#d94bd0] hover:text-black
+hover:font-bold hover:text-lg
+hover:[clip-path:polygon(3%_15%,12%_10%,14%_5%,85%_8%,90%_12%,97%_10%,100%_20%,97%_30%,100%_35%,97%_65%,100%_75%,92%_80%,88%_85%,15%_82%,8%_85%,5%_80%,0_75%,3%_60%,0_45%,3%_25%)]"
+><i class="fa-solid fa-magnifying-glass"></i> Explore </a>
+
+<a routerLink="" 
+class="block rounded-xl p-2 text-white
+hover: hover:bg-[#d94bd0] hover:text-black
+hover:font-bold hover:text-lg
+hover:[clip-path:polygon(3%_15%,12%_10%,14%_5%,85%_8%,90%_12%,97%_10%,100%_20%,97%_30%,100%_35%,97%_65%,100%_75%,92%_80%,88%_85%,15%_82%,8%_85%,5%_80%,0_75%,3%_60%,0_45%,3%_25%)]"
+> <i class="fa-solid fa-users"></i> Communities </a>
+
+<a routerLink="/notifications" routerLinkActive="bg-[#d94bd0] text-black font-bold text-lg [clip-path:polygon(3%_15%,12%_10%,14%_5%,85%_8%,90%_12%,97%_10%,100%_20%,97%_30%,100%_35%,97%_65%,100%_75%,92%_80%,88%_85%,15%_82%,8%_85%,5%_80%,0_75%,3%_60%,0_45%,3%_25%)]"
+class="block rounded-xl p-2 text-white
+hover: hover:bg-[#d94bd0] hover:text-black
+hover:font-bold hover:text-lg
+hover:[clip-path:polygon(3%_15%,12%_10%,14%_5%,85%_8%,90%_12%,97%_10%,100%_20%,97%_30%,100%_35%,97%_65%,100%_75%,92%_80%,88%_85%,15%_82%,8%_85%,5%_80%,0_75%,3%_60%,0_45%,3%_25%)]"
+><i class="fa-regular fa-bell"></i> Notifications</a>
+
+<a routerLink="/profile" routerLinkActive="bg-[#d94bd0] text-black font-bold text-lg [clip-path:polygon(3%_15%,12%_10%,14%_5%,85%_8%,90%_12%,97%_10%,100%_20%,97%_30%,100%_35%,97%_65%,100%_75%,92%_80%,88%_85%,15%_82%,8%_85%,5%_80%,0_75%,3%_60%,0_45%,3%_25%)]"
+class="block rounded-xl p-2 text-white
+hover: hover:bg-[#d94bd0] hover:text-black
+hover:font-bold hover:text-lg
+hover:[clip-path:polygon(3%_15%,12%_10%,14%_5%,85%_8%,90%_12%,97%_10%,100%_20%,97%_30%,100%_35%,97%_65%,100%_75%,92%_80%,88%_85%,15%_82%,8%_85%,5%_80%,0_75%,3%_60%,0_45%,3%_25%)]"
+> <i class="fa-regular fa-user"></i> My Profile </a>
+
+<a routerLink="" class="block rounded-xl p-2 text-white
+hover: hover:bg-[#d94bd0] hover:text-black
+hover:font-bold hover:text-lg
+hover:[clip-path:polygon(3%_15%,12%_10%,14%_5%,85%_8%,90%_12%,97%_10%,100%_20%,97%_30%,100%_35%,97%_65%,100%_75%,92%_80%,88%_85%,15%_82%,8%_85%,5%_80%,0_75%,3%_60%,0_45%,3%_25%)]"
+><i class="fa-regular fa-bookmark"></i> Saved </a>
+
+<a routerLink="" class="block rounded-xl p-2 text-white
+hover: hover:bg-[#d94bd0] hover:text-black
+hover:font-bold hover:text-lg
+hover:[clip-path:polygon(3%_15%,12%_10%,14%_5%,85%_8%,90%_12%,97%_10%,100%_20%,97%_30%,100%_35%,97%_65%,100%_75%,92%_80%,88%_85%,15%_82%,8%_85%,5%_80%,0_75%,3%_60%,0_45%,3%_25%)]"
+> <i class="fa-regular fa-message"></i> Messages </a>
+</aside>

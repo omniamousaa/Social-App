@@ -1,0 +1,150 @@
+<!-- posts -->
+<div class="mt-5 bg-black flex items-center justify-center">
+  <div class="flex flex-col gap-5 w-full max-w-6xl rounded-2xl">
+@for (post of allposts(); track post._id) {
+  <div class="bg-[#0d0e10] p-3 sm:p-5 text-white border rounded-2xl border-[#292a2e] relative">
+
+    <span class="absolute right-[16%] top-10 text-6xl text-white">☆</span>
+
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="rounded-full bg-gradient-to-r from-pink-500 to-purple-500 p-1">
+          <img [src]="post.user.photo"class="h-16 w-16 rounded-full border-2 border-black object-cover"/>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold">
+            {{post.user.name}} &lt;3 <span class="text-pink-500">★</span>
+          </h3>
+          <p class="text-sm text-gray-400">{{post.user.name}}</p>
+          <p class="text-sm text-gray-400"> {{post.createdAt}}</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3">
+        <button type="button" class="w-max cursor-pointer -rotate-6 bg-lime-300 text-black font-bold text-lg px-4 py-1
+          [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]">
+          Save
+        </button>
+      @if (post.user._id == loggedInUserData()._id ) {
+        <button type="button" class="w-max cursor-pointer -rotate-6 bg-violet-300 text-black font-bold text-lg px-4 py-1
+          [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]">
+          Edit
+        </button>
+        <button (click)="deletePost(post._id)" type="button" class="w-max cursor-pointer -rotate-6 bg-red-700 text-black font-bold text-lg px-4 py-1
+          [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]">
+          Delete
+        </button>
+      }
+      </div>
+    </div>
+
+    <!-- Text -->
+    <p class="mt-4 text-lg leading-7">{{post.body}}</p>
+
+    <!-- Image -->
+    <div class="relative mt-3 h-60 overflow-hidden rounded-xl bg-[#8b7464]">
+      <img [src]="post.image"class="h-full w-full object-cover"alt="post-image"/>
+
+      <!-- <span class="absolute right-[16%] top-0 text-6xl text-white">☆</span> -->
+    </div>
+
+    <!-- Reactions -->
+    <div class="flex flex-wrap items-center justify-between gap-3 py-3 mt-2 text-gray-400">
+      <div class="flex items-center">
+        <!-- <span class="z-30 flex h-7 w-7 items-center justify-center rounded-full bg-pink-500">♥</span>
+        <span class="-ml-2 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-blue-500">👍</span>
+        <span class="-ml-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-pink-500">♥</span>
+        <span class="-ml-2 flex h-7 w-7 items-center justify-center rounded-full bg-yellow-400">😮</span> -->
+        <!-- <span class="ml-3">{{post.likesCount}} Likes</span> -->
+        <button type="button" class="w-max cursor-pointer bg-lime-300 text-black font-bold text-lg px-4 py-1
+          [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]">
+          {{post.likesCount}} Likes
+        </button>
+      </div>
+
+      <div class="flex gap-5 text-sm sm:text-base">
+        <!-- <span>{{post.commentsCount}} comments</span> -->
+        <button #buttonComment (click)="openComments(post._id)" type="button" class="w-max cursor-pointer bg-red-700 text-black font-bold text-lg px-4 py-1
+          [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]">
+          {{post.commentsCount}} comments
+        </button>
+        <button type="button" class="w-max cursor-pointer bg-lime-300 text-black font-bold text-lg px-4 py-1
+          [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]">
+          43 reposts
+        </button>
+        <!-- <span>43 reposts</span> -->
+        <!-- <button>View Details</button> -->
+        <button [routerLink]="['/post-details' , post._id]" type="button" class="w-max cursor-pointer bg-[#d94bd0] text-black font-bold text-lg px-4 py-1
+          [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]">
+          View Details
+        </button>
+      </div>
+    </div>
+
+    <div class="border-t border-[#292a2e]"></div>
+
+    <!-- Actions -->
+    <div class="grid grid-cols-4 pt-4">
+      <button class="flex items-center justify-center gap-2 text-pink-500">
+        <span class="text-2xl">♥</span>
+        <span>Like</span>
+      </button>
+
+      <button class="flex items-center justify-center gap-2 text-gray-300">
+        <span class="text-2xl">♡</span>
+        <span>Comment</span>
+      </button>
+
+      <button class="flex items-center justify-center gap-2 text-lime-400">
+        <span class="text-2xl">⟳</span>
+        <span>Repost</span>
+      </button>
+
+      <button class="flex items-center justify-center gap-2 text-gray-300">
+        <span class="text-2xl">➤</span>
+        <span>Send</span>
+      </button>
+    </div>
+
+    @defer (on interaction(buttonComment)) {
+      <app-comments [postId]="post._id"></app-comments>
+    }
+
+  </div>
+}
+  </div>
+</div>
+<!-- @if (showComments()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" (click)="closeComments()">
+    <div class="w-full max-w-lg rounded-2xl bg-[#0d0e10] p-5 text-white" (click)="$event.stopPropagation()">
+      <div class="mb-4 flex justify-between">
+        <h2 class="text-xl font-bold">Comments</h2>
+        <button (click)="closeComments()">✕</button>
+      </div>
+
+      <div class="max-h-80 space-y-4 overflow-y-auto">
+        @for (comment of comments(); track comment._id) {
+          <div class="flex gap-3 border-b border-[#292a2e] py-4">
+            <img
+              [src]="comment.commentCreator.photo" class="h-10 w-10 rounded-full object-cover"/>
+
+            <div>
+              <h3 class="font-bold">{{ comment.commentCreator.name }}</h3>
+              <p class="mt-1 text-gray-300">{{ comment.content }}</p>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="mt-3 flex gap-2">
+        <input #replyInput type="text" placeholder="Write a reply..." class="min-w-0 flex-1 rounded-lg border border-[#292a2e] bg-[#18191c] px-3 py-2 text-sm outline-none"/>
+
+        <button
+          class="rounded-lg bg-blue-600 px-3 py-2 text-sm">
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+} -->
+

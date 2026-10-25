@@ -1,0 +1,72 @@
+<!--Create-->
+  <form #createPostForm (submit)="submitCreate($event , createPostForm)" class="mt-5 bg-[#0d0e10] border border-[#292a2e] rounded-2xl p-3 sm:p-5 w-full min-w-0">
+    <div class="flex items-center gap-5">
+    <div class="relative w-21 h-21 rounded-full bg-gradient-to-tr from-pink-500 to-lime-400 p-1">
+      <div class="h-full w-full rounded-full bg-black p-[2px]">
+        <img [src]="loggedInUserData().photo" class="h-full w-full rounded-full object-cover" alt="">
+      </div>
+      <button class="absolute bottom-2 -right-1 flex h-7 w-7 items-center justify-center rounded-full border-2 border-black bg-pink-500 text-xl font-bold text-white">+</button>
+    </div>
+    <div class="flex flex-col gap-2">
+      <p class="text-sm font-bold text-white">{{ loggedInUserData().name }}</p>
+      <select [formControl]="privcyInput" class="rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white outline-none">
+        <option value="public" selected>public</option>
+        <option value="following">Following</option>
+        <option value="only_me">Only me</option>
+      </select>
+    </div>
+    </div>
+    <!-- <p>what's on your mind?</p> -->
+    <div class="min-w-0 flex-1 mt-5">
+      <textarea [formControl]="bodyInput" class="w-full resize-none rounded-xl bg-gray-900 p-3 text-white outline-none placeholder:text-gray-500" placeholder="what's on your mind?" rows="2"></textarea>
+    </div>
+  
+    @if (imgToDisplay()) {
+      <div class="relative">
+        <button class="absolute top-7 -translate-y-1/2 right-4 cursor-pointer" type="button" (click)="resetImg()" ><img src="/images/doodles/remove-circle-svgrepo-com.svg" class="w-10 h-10" alt="Remove image"></button>
+        <img [src]="imgToDisplay()" class="w-full rounded-2xl mt-3 h-[200px] object-cover:" alt="">
+      </div>
+    }
+
+    <div class="flex-1 mt-5">
+    <div class="flex flex-wrap items-center gap-3">
+      <label class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg text-[#D94BD0] font-semibold cursor-pointer
+      [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]">
+        <span><img src="/images/doodles/cam-svgrepo-com (3).svg" class="w-7 h-7" alt=""></span>
+        Photo / Video
+        <input type="file" accept="image/*,video/*" class="hidden" (change)="selectImg($event)" />
+      </label>
+
+      <button type="button" class="flex items-center gap-2  bg-white text-[#D94BD0] rounded-lg px-3 py-2 font-semibold
+      [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]
+      ">
+        GIF<span><img src="images/doodles/gif-svgrepo-com.svg" class="w-7 h-7" alt=""></span>
+      </button>
+
+      <button type="button" class="flex items-center gap-2  bg-white text-[#D94BD0] px-6 py-3 rounded-lg font-semibold
+      [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]
+      ">
+        Poll<span><img src="/images/doodles/poll-svgrepo-com.svg" class="w-7 h-7" alt=""></span>
+      </button>
+
+      <button type="button" class="flex items-center gap-2 bg-white text-[#D94BD0] px-6 py-3 rounded-lg font-semibold
+      [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]
+      ">
+        Playlist<span><img src="/images/doodles/playlist-minimalistic-2-svgrepo-com.svg" class="w-7 h-7" alt=""></span>
+      </button>
+
+      <button type="button" class="flex items-center gap-2 bg-white text-[#D94BD0] px-6 py-3 rounded-lg font-semibold
+      [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]
+      ">
+        Feeling<span><img src="/images/doodles/emotion-svgrepo-com.svg" class="w-7 h-7" alt=""></span>
+      </button>
+
+      <button
+        type="submit" 
+        class="w-max cursor-pointer ml-7 -rotate-6 bg-lime-300 text-black font-bold text-lg px-4 py-1
+        [clip-path:polygon(5%_12%,90%_0,92%_10%,100%_15%,96%_28%,100%_35%,96%_85%,88%_90%,88%_100%,12%_95%,10%_88%,4%_92%,5%_78%,0_70%,4%_28%,0_20%)]">
+        Post
+      </button>
+    </div>
+    </div>
+  </form>

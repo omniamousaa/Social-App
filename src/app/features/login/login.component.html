@@ -1,0 +1,106 @@
+<div class="min-h-screen w-full bg-[linear-gradient(to_right,var(--color-teal-700)_50%,var(--color-gray-50)_50%)] flex items-center justify-center">
+    <section class="auth-container flex w-11/12 max-w-5xl mx-auto my-10 rounded-2xl overflow-hidden shadow-xl .min-h-\[600px\] bg-[linear-gradient(to_right,red_50%,black_50%)]">
+
+    <div class="welcome-section w-1/2 bg-teal-900 text-white flex items-center justify-center text-center">
+        <div class="welcome-content grid gap-3.5">
+            <h2>Welcome Back!</h2>
+            <p>
+                Log in and continue your social journey.
+            </p>
+            <button class="bg-gray-100 text-gray-900 w-full rounded-xl py-2" type="button" routerLink="/register">Create New Account</button>
+        </div>
+    </div>
+
+    <div class="register-section w-1/2 bg-gray-100 p-8 flex flex-col justify-center">
+    <h2 class="font-bold text-3xl text-center mb-5 text-gray-900">Log in to Route Posts</h2>
+    <form [formGroup]="loginForm" class="grid gap-3.5" (ngSubmit)="submitlogin()">
+    <!-- Email -->
+    <div>
+    <div class="relative">
+    <input type="email" id="Email" formControlName="email"[class]="{
+    'border-red-500':loginForm.get('email')?.invalid &&loginForm.get('email')?.touched,
+    'border-green-500':loginForm.get('email')?.valid &&loginForm.get('email')?.touched,
+    }"class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base  .border-1 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer" placeholder=" " />
+    <label for="Email" class="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 start-1 origin-\[0\]  px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Email Address</label>
+    </div>
+    @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+    <div class="flex px-3 py-1 mb-2 text-sm text-fg-danger-strong rounded-lg" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+            @if (loginForm.get('email')?.hasError('required')) {
+                <li>Email is required</li>
+            }
+            @if (loginForm.get('email')?.hasError('email')) {
+            <li>Please enter a valid email address.</li>
+            }
+        </ul>
+    </div>
+    </div>
+    }
+    </div>
+    <!-- userpassword -->
+    <div>
+    <div class="relative">
+    <input #inputPassword type="password" id="userpassword" formControlName="password" [class]="{
+    'border-red-500':loginForm.get('password')?.invalid &&loginForm.get('password')?.touched,
+    'border-green-500':loginForm.get('password')?.valid &&loginForm.get('password')?.touched,
+    }"
+    class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base  .border-1 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer" placeholder=" " />
+    <label for="userpassword" class="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] start-1  px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto .start-1">password</label>
+    <!-- @if (inputPassword.type == 'password') {
+    <div class="absolute top-1/2 -translate-y-1/2 right-4 cursor-pointer"><i (click)="togglePassword(inputPassword)" class="fa-regular fa-eye-slash" ></i></div>
+    }
+    @if (inputPassword.type == 'text') {
+    <div class="absolute top-1/2 -translate-y-1/2 right-4 cursor-pointer"><i (click)="togglePassword(inputPassword)" class="fa-regular fa-eye" ></i></div>
+    } -->
+
+    @if (inputPassword.type == 'password' || inputPassword.type == 'text') {
+  <div class="absolute top-1/2 -translate-y-1/2 right-4 cursor-pointer">
+    <i
+      (click)="togglePassword(inputPassword)"
+      class="fa-regular"
+      [class.fa-eye-slash]="inputPassword.type == 'password'"
+      [class.fa-eye]="inputPassword.type == 'text'">
+    </i>
+  </div>
+}
+    </div>
+    @if (loginForm.get('password')?.invalid &&loginForm.get('password')?.touched ) {
+        <div class="flex px-3 py-1 mb-2 text-sm text-fg-danger-strong rounded-lg" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+            @if (loginForm.get('password')?.hasError('required')) {
+            <li>Password is required.</li>
+            }
+            @if (loginForm.get('password')?.hasError('pattern')) {
+            <li>Must contain at least 8 chars, 1 uppercase, 1 lowercase</li>
+            }
+        </ul>
+    </div>
+</div>
+    }
+    </div>
+    @if (loginErrorMessage()) {
+        <div class="flex px-3 py-1 mb-2 text-sm text-fg-danger-strong rounded-2xl" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <p>{{loginErrorMessage()}}</p>
+    </div>
+    </div>
+    }
+    @if (loginsuccessMessage()) {
+        <div class="flex px-3 py-1 mb-2 text-sm text-green-400 rounded-2xl" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <p>{{loginsuccessMessage()}}</p>
+    </div>
+    </div>
+    }
+    <button class="bg-teal-900 text-amber-50 w-full rounded-xl py-2" type="submit">submit @if (isLoding()) {
+        <i class="fa-solid fa-spinner fa-spin"></i>}</button>
+    </form>
+    </div>
+</section>
+</div>

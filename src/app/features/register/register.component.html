@@ -1,0 +1,208 @@
+<div class="min-h-screen w-full bg-[linear-gradient(to_right,var(--color-teal-700)_50%,var(--color-gray-50)_50%)] flex items-center justify-center">
+    <section class="auth-container flex w-11/12 max-w-5xl mx-auto my-10 rounded-2xl overflow-hidden shadow-xl .min-h-\[600px\] bg-[linear-gradient(to_right,red_50%,black_50%)]">
+
+    <div class="welcome-section w-1/2 bg-teal-900 text-white flex items-center justify-center text-center">
+        <div class="welcome-content grid gap-2.5">
+            <h2>Welcome</h2>
+            <p>
+                Stay
+            </p>
+            <button class="bg-gray-100 text-gray-900 w-full rounded-xl py-2 px-5" type="button" routerLink="/login">I Already Have An Account</button>
+        </div>
+    </div>
+
+    <div class="register-section w-1/2 bg-gray-100 p-8 flex flex-col justify-center">
+    <h2 class="font-bold text-3xl text-center text-gray-900 mb-5">Create a new account</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="submitRegister()" class="grid gap-3.5" action="">
+    <!-- userfullName -->
+    <div>
+    <div class="relative">
+    <input type="text" id="userfullName" formControlName="name" [class]="{
+    'border-red-500':registerForm.get('name')?.invalid &&registerForm.get('name')?.touched,
+    'border-green-500':registerForm.get('name')?.valid &&registerForm.get('name')?.touched,
+    }" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base border border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer" placeholder=" " />
+    <label for="userfullName" class="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 start-1 origin-\[0\]  px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto .start-1">full Name</label>
+    </div>
+    @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
+    <div class="flex px-3 py-1 mb-2 text-sm text-fg-danger-strong rounded-lg" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+            @if (registerForm.get('name')?.hasError('required')) {
+                <li>Full Name is required.</li>
+            }
+            @if (registerForm.get('name')?.hasError('minlength')) {
+                <li>Name must be at least 3 characters</li>
+            }
+            @if (registerForm.get('name')?.hasError('maxlength')) {
+                <li>Name must be at most 20 characters</li>
+            }
+        </ul>
+    </div>
+    </div>
+}
+    </div>
+    <!-- userName -->
+    <div>
+    <div class="relative">
+    <input type="text" id="userName" formControlName="username" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base  .border-1 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer" placeholder=" " />
+    <label for="userName" class="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] start-1  px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto .start-1">UserName (Optional)</label>
+    </div>
+    </div>
+    <!-- Email -->
+    <div>
+    <div class="relative">
+    <input type="email" id="Email" formControlName="email"[class]="{
+    'border-red-500':registerForm.get('email')?.invalid &&registerForm.get('email')?.touched,
+    'border-green-500':registerForm.get('email')?.valid &&registerForm.get('email')?.touched,
+    }"class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base  .border-1 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer" placeholder=" " />
+    <label for="Email" class="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 start-1 origin-\[0\]  px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto .start-1">Email Address</label>
+    </div>
+    @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+    <div class="flex px-3 py-1 mb-2 text-sm text-fg-danger-strong rounded-lg" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+            @if (registerForm.get('email')?.hasError('required')) {
+                <li>Email is required</li>
+            }
+            @if (registerForm.get('email')?.hasError('email')) {
+            <li>Please enter a valid email address.</li>
+            }
+        </ul>
+    </div>
+    </div>
+    }
+    </div>
+    <!-- Gender -->
+    <div>
+    <div class="relative">
+    <select name="userGender"id="userGender"formControlName="gender" [class]="{
+    'border-red-500':registerForm.get('gender')?.invalid &&registerForm.get('gender')?.touched,
+    'border-green-500':registerForm.get('gender')?.valid &&registerForm.get('gender')?.touched,
+    }" class="peer block w-full rounded-base border border-default-medium bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-heading appearance-none focus:outline-none focus:ring-0 focus:border-brand">
+        <option value="" disabled selected hidden>Choose Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
+    <label for="userGender"class="absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform  px-2 text-sm text-body duration-300 peer-focus:text-fg-brand">Gender</label>
+    </div>
+    @if (registerForm.get('gender')?.invalid && registerForm.get('gender')?.touched ) {
+        <div class="flex px-3 py-1 mb-2 text-sm text-fg-danger-strong rounded-lg" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+            @if (registerForm.get('gender')?.hasError('required')) {
+            <li>Please select your gender.</li>
+            }
+        </ul>
+    </div>
+    </div>
+    }
+    </div>
+    <!-- Date -->
+    <div>
+    <div class="relative">
+    <input type="date" id="Date" formControlName="dateOfBirth" [class]="{
+    'border-red-500':registerForm.get('dateOfBirth')?.invalid &&registerForm.get('dateOfBirth')?.touched,
+    'border-green-500':registerForm.get('dateOfBirth')?.valid &&registerForm.get('dateOfBirth')?.touched,
+    }" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base  .border-1 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer" placeholder=" " />
+    <label for="Date" class="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 .origin-\[0\]  px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto .start-1">Date Of Birth</label>
+    </div>
+    @if (registerForm.get('dateOfBirth')?.invalid && registerForm.get('dateOfBirth')?.touched) {
+    <div class="flex px-3 py-1 mb-2 text-sm text-fg-danger-strong rounded-lg" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+            @if (registerForm.get('dateOfBirth')?.hasError('required')) {
+            <li>Date of birth is required.</li>
+            }
+        </ul>
+    </div>
+    </div>
+    }
+    </div>
+    <!-- userpassword -->
+    <div>
+    <div class="relative">
+    <input type="password" id="userpassword" formControlName="password" [class]="{
+    'border-red-500':registerForm.get('password')?.invalid &&registerForm.get('password')?.touched,
+    'border-green-500':registerForm.get('password')?.valid &&registerForm.get('password')?.touched,
+    }" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base  .border-1 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer" placeholder=" " />
+    <label for="userpassword" class="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 start-1 origin-\[0\]  px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto .start-1">password</label>
+    </div>
+    @if (registerForm.get('password')?.invalid &&registerForm.get('password')?.touched ) {
+        <div class="flex px-3 py-1 mb-2 text-sm text-fg-danger-strong rounded-lg" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+            @if (registerForm.get('password')?.hasError('required')) {
+            <li>Password is required.</li>
+            }
+            @if (registerForm.get('password')?.hasError('pattern')) {
+            <li>Must contain at least 8 chars, 1 uppercase, 1 lowercase</li>
+            }
+        </ul>
+    </div>
+</div>
+    }
+    </div>
+    <!-- confirm password -->
+    <div>
+    <div class="relative">
+    <input type="password" id="userRePassword" formControlName="rePassword" [class]="{
+    'border-red-500':registerForm.get('repassword')?.invalid &&registerForm.get('rePassword')?.touched,
+    'border-green-500':registerForm.get('repassword')?.valid &&registerForm.get('rePassword')?.touched,
+    }" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base .border-1 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer" placeholder=" " />
+    <label for="userRePassword" class="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 start-1 origin-\[0\]  px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto .start-1">confirm password</label>
+    </div>
+    @if (registerForm.get('rePassword')?.invalid && registerForm.get('rePassword')?.touched ) {
+    <div class="flex px-3 py-1 mb-2 text-sm text-fg-danger-strong rounded-lg" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+            @if (registerForm.get('rePassword')?.hasError('required')) {
+            <li>Please confirm your password.</li>
+            }
+            <li>Passwords do not match.</li>
+        </ul>
+    </div>
+    </div>
+    }
+    </div>
+    @if (registerErrorMessage()) {
+        <div class="flex px-3 py-1 mb-2 text-sm text-fg-danger-strong rounded-2xl" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <p>{{registerErrorMessage()}}</p>
+    </div>
+    </div>
+    }
+    @if (registersuccessMessage()) {
+        <div class="flex px-3 py-1 mb-2 text-sm text-green-400 rounded-2xl" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <p>{{registersuccessMessage()}}</p>
+    </div>
+    </div>
+    }
+    <button class="bg-teal-900 text-amber-50 w-full rounded-xl py-2" type="submit">submit 
+        @if (isLoding()) {<i class="fa-solid fa-spinner fa-spin"></i>}
+    </button>
+    </form>
+    </div>
+</section>
+</div>
+
+
+<!-- <div class="flex p-4 mb-4 text-sm text-fg-danger-strong rounded-lg" role="alert">
+    <span class="sr-only">Danger</span>
+    <div>
+        <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+            <li>Please confirm your password.</li>
+            <li>Passwords do not match.</li>
+
+            <li>Please enter a valid email or username.</li>
+        </ul>
+    </div>
+</div> -->
